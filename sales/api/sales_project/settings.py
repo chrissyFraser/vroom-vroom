@@ -28,6 +28,9 @@ DEBUG = True
 
 INSTALLED_APPS = [
     'sales_rest.apps.SalesRestConfig',
+    'address',
+    "phonenumber_field",
+    "djmoney",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
