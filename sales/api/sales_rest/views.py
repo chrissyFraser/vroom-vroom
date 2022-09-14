@@ -72,8 +72,7 @@ def salesperson(request, pk):
                 encoder=SalesPersonEncoder,
                 safe=False
             )
-        except:
-            SalesPerson.DoesNotExist:
+        except SalesPerson.DoesNotExist:
             response = JsonResponse({"message": "Does not exist"})
             response.status_code = 404
             return response

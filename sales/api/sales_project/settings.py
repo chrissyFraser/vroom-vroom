@@ -26,11 +26,13 @@ SECRET_KEY = 'django-insecure-=0#lozw6m8fg901fvz9(b-$@y*_3)v9tgbo9x2se(ezga0)(mj
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+#GOOGLE_API_KEY = 'AIzaSyD--your-google-maps-key-SjQBE'
+
 INSTALLED_APPS = [
     'sales_rest.apps.SalesRestConfig',
-    'address',
-    "phonenumber_field",
-    "djmoney",
+    # 'address',
+    # 'phonenumber_field',
+    # 'djmoney',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
