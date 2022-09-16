@@ -16,7 +16,6 @@ class SalespersonEncoder(ModelEncoder):
     properties = [
         "name",
         "employeeNumber",
-        "id",
     ]
 
 
@@ -51,7 +50,7 @@ def api_new_salesperson(request):
     if request.method == "GET":
         salesperson = Salesperson.objects.all()
         return JsonResponse(
-            {"salespeople": salesperson},
+            {"salesperson": salesperson},
             encoder=SalespersonEncoder,
         )
     else:
@@ -129,9 +128,9 @@ def api_sales(request):
             customerID = content["customer"]
             customer = Customer.objects.get(id=customerID)
             content["customer"] = customer
-
-            salespersonID = content["sales_person"]
-            salesperson = Salesperson.objects.get(id=salespersonID)
+            print("I wanna see Dis", content)
+            salespersonID = content["salesperson"]
+            salesperson = Salesperson.objects.get(employeeNumber=salespersonID)
             content["salesperson"] = salesperson
 
             sales = SalesRecord.objects.create(**content)

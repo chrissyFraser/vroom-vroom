@@ -37,13 +37,13 @@ class SaleRecordForm extends React.Component {
             },
         };
         const response = await fetch(saleUrl, fetchConfig);
-
+        console.log(response)
         if (response.ok) {
-            const newSale = await response.json();
+            const new_sale = await response.json();
 
             const cleared = {
-                automobiles: [],
                 salespeople: [],
+                automobiles: [],
                 customers: [],
                 price: '',
             };
@@ -75,9 +75,9 @@ class SaleRecordForm extends React.Component {
     
         const automobileUrl = 'http://localhost:8100/api/automobiles/';
         const automobileResponse = await fetch(automobileUrl);
-        const salespersonUrl = 'http://localhost:8090/api/salesperson/';
+        const salespersonUrl = 'http://localhost:8090/api/new_salesperson/';
         const salespersonResponse = await fetch(salespersonUrl);
-        const customerUrl = 'http://localhost:8090/api/customer/';
+        const customerUrl = 'http://localhost:8090/api/new_customer/';
         const customerResponse = await fetch(customerUrl);
 
         if (automobileResponse.ok && salespersonResponse.ok && customerResponse.ok) {
@@ -87,7 +87,7 @@ class SaleRecordForm extends React.Component {
             const customerData = await customerResponse.json();
 
             this.setState({ automobiles: automobileData.autos })
-            this.setState({ salespeople: salespersonData.salespeople })
+            this.setState({ salespeople: salespersonData.salesperson})
             this.setState({ customers: customerData.customers })
         }
     }
@@ -112,13 +112,12 @@ class SaleRecordForm extends React.Component {
                                     })}
                                 </select>
                             </div>
-
                             <div className="mb-3">
-                                <select onChange={this.handleSalesPersonChange} value={this.state.salesperson} required id="salesperson" name="salesperson" className="form-select">
+                                <select onChange={this.handleSalespersonChange} value={this.state.salesperson} required id="salesperson" name="salesperson" className="form-select">
                                     <option value="">Salesperson</option>
                                     {this.state.salespeople.map(salesperson => {
                                         return (
-                                            <option key={salesperson.id} value={salesperson.id}>{salesperson.name}</option>
+                                            <option key={salesperson.employeeNumber} value={salesperson.employeeNumber}>{salesperson.name}</option>
                                         );
                                     })}
                                 </select>
