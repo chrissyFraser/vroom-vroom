@@ -1,9 +1,8 @@
-from turtle import color
 from django.db import models
 from django.urls import reverse
 
 class AutoVO(models.Model):
-    color = models.CharField(max_length=50)
+    color = models.CharField(max_length=50, default="---")
     year = models.SmallIntegerField()
     vin = models.CharField(max_length=25, unique=True)
 
@@ -18,7 +17,7 @@ class Technician(models.Model):
         return self.name
 
     def get_api_url(self):
-        return reverse("api_technician", kwargs={"pk": self.pk})
+        return reverse("technician_detail", kwargs={"pk": self.pk})
 
 class Appointment(models.Model):
     vip = models.BooleanField(default=False)
@@ -28,12 +27,12 @@ class Appointment(models.Model):
     time = models.TimeField(auto_now_add=False, auto_now=False)
     reason = models.TextField()
     technician = models.ForeignKey(Technician, related_name="appointment", on_delete=models.PROTECT)
-    finished = models.BooleanField()
+    finished = models.BooleanField(default=False)
     canceled = models.BooleanField(default=False)
 
 
     def get_api_url(self):
-        return reverse("api_appointment", kwargs={"pk": self.id})
+        return reverse("appointment_detail", kwargs={"pk": self.id})
 
     def __str__(self):
         return f"Appointment for {self.owner}, VIP: {self.vip}"

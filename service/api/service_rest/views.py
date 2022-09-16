@@ -3,14 +3,12 @@ from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 import json
 
-from inventory.api.inventory_rest.models import Automobile
-
 from .models import Technician, Appointment, AutoVO
 from .encoders import TechEncoder, ApptEncoder
 
 
 @require_http_methods(["GET", "POST"])
-def appointments_list(request):
+def appointment_list(request):
     if request.method == "GET":
         appointments = Appointment.objects.all()
         return JsonResponse(
@@ -92,7 +90,7 @@ def appointment_detail(request, pk):
                 )
 
 @require_http_methods(["GET", "POST"])
-def list_technicians(request):
+def technician_list(request):
     if request.method == "GET":
         technicians = Technician.objects.all()
         return JsonResponse(

@@ -15,19 +15,20 @@ from service_rest.models import AutoVO
 def get_autos():
     response = requests.get("http://inventory-api:8000/api/automobiles/")
     content = json.loads(response.content)
-    print("content": content)
+    print("CONTENT////////////////", content)
     for auto in content["autos"]:
         AutoVO.objects.update_or_create(
-            import_href=auto["href"],
-            defaults={"vin": auto["vin"],}
+            vin=auto["vin"],
+            defaults={"year": auto["year"],
+            "color":auto["color"],
+            }
         )
 
 def poll():
     while True:
-        print('Service poller polling for data')
+        print('//////////Service poller polling for data///////////')
         try:
             get_autos()
-            pass
         except Exception as e:
             print(e, file=sys.stderr)
         time.sleep(60)
