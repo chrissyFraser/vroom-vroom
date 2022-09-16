@@ -1,39 +1,57 @@
-#from unicodedata import name
 from django.db import models
-#from phonenumber_field.modelfields import PhoneNumberField
-#from address.models import AddressField
-#from djmoney.models.fields import MoneyField
+from django.urls import reverse
 
 
 class AutomobileVO(models.Model):
-    import_href = models.CharField(max_length=200, unique=True)
-    vin = models.CharField(max_length=17, unique=True)
+    color = models.CharField(max_length=50, default="color")
+    year = models.IntegerField(default=0000)
+    vin = models.CharField(max_length=20, unique=True)
+    def __str__(self):
+        return self.vin
 
 
-class SalesPerson(models.Model):
+class Salesperson(models.Model):
     name = models.CharField(max_length=100)
-    employeeNumber = models.IntegerField()
+    employeeNumber = models.IntegerField(primary_key=True)
+    def get_api_url(self):
+        return reverse("api_salesperson_records", kwargs={"pk": self.pk})
+    def __str__(self):
+        return self.name
 
 
 class Customer(models.Model):
     name = models.CharField(max_length=100)
-    #address = AddressField()
-    address = models.TextField()
-    #phoneNumber = PhoneNumberField()
-    phoneNumber = models.CharField(max_length=20)
+    address = models.TextField(max_length=500)
+    phoneNumber = models.CharField(max_length=50)
+    def get_api_url(self):
+        return reverse("api_customer_details", kwargs={"pk": self.pk})
+    def __str__(self):
+        return self.name
 
 
-class SaleRecord(models.Model):
-    automobile = models.OneToOneField(
-        AutomobileVO,
-        related_name="sale_record",
-        on_delete=models.CASCADE,
-        primary_key=True,
+class SalesRecord(models.Model):
+    salesperson = models.ForeignKey(
+        Salesperson,
+        related_name="sales",
+        on_delete=models.PROTECT
     )
-    sales_person = models.ForeignKey(
-        SalesPerson, related_name="sale_record", on_delete=models.CASCADE)
+    automobile = models.ForeignKey(
+        AutomobileVO,
+        related_name="sales",
+        on_delete=models.PROTECT
+    )
     customer = models.ForeignKey(
-        Customer, related_name="sale_record", on_delete=models.CASCADE)
-    # price = MoneyField(decimal_places=2, default=0,
-    # default_currency='USD', max_digits=10, null=True)
+        Customer,
+        related_name="sales",
+        on_delete=models.PROTECT
+    )
     price = models.IntegerField()
+
+    def get_api_url(self):
+        return reverse("api_sales", kwargs={"pk": self.pk})
+
+    def __str__(self):
+        return str("Salesperson: " + self.salesperson.name)
+
+
+

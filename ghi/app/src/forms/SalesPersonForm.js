@@ -9,13 +9,13 @@ class SalesPersonForm extends React.Component {
         };
 
         this.handleNameChange = this.handleNameChange.bind(this);
-        this.handleEmployeeNumber = this.handleEmployeeNumber.bind(this);
+        this.handleEmployeeNumberChange = this.handleEmployeeNumberChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
 
     async componentDidMount() {
-        const url = 'http://localhost:8090/list_salespeople/';
+        const url = 'http://localhost:8090/api/list_salespeople/';
         const response = await fetch(url);
 
         if (response.ok) {
@@ -28,7 +28,7 @@ class SalesPersonForm extends React.Component {
         event.preventDefault();
         const data = { ...this.state };
 
-        const salespersonUrl = 'http://localhost:8000/api/salesperson/';
+        const salespersonUrl = 'http://localhost:8090/api/salesperson/';
         const fetchConfig = {
             method: "post",
             body: JSON.stringify(data),
