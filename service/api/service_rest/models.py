@@ -2,7 +2,7 @@ from django.db import models
 from django.urls import reverse
 
 class AutoVO(models.Model):
-    color = models.CharField(max_length=50, default="---")
+    color = models.CharField(max_length=50)
     year = models.SmallIntegerField()
     vin = models.CharField(max_length=25, unique=True)
 
@@ -23,8 +23,8 @@ class Appointment(models.Model):
     vip = models.BooleanField(default=False)
     vehicle = models.ForeignKey(AutoVO, related_name="service", on_delete=models.PROTECT)
     owner = models.CharField(max_length=200)
-    date = models.DateField(auto_now_add=False, auto_now=False)
-    time = models.TimeField(auto_now_add=False, auto_now=False)
+    date = models.DateField(auto_now=True, null=True, blank=True)
+    time = models.TimeField(auto_now=True, null=True, blank=True)
     reason = models.TextField()
     technician = models.ForeignKey(Technician, related_name="appointment", on_delete=models.PROTECT)
     finished = models.BooleanField(default=False)

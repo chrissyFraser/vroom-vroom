@@ -25,5 +25,14 @@ If the VIN of the automobile that is coming for an appointment was at one time i
 
 Each appointment in the list of appointments should have a button that allows the appointment to be marked canceled or finished. After being marked, it should no longer show up in the list of appointments.
 
+
 [] Also create a link in the navbar to get to the list of appointments.
+
+
+
+
+---
+add manufacturers
+list manufacturers
+add vehicle model
 ---
