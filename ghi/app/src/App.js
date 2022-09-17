@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import SalesPersonForm from './forms/SalespersonForm';
+import SalespersonForm from './forms/SalespersonForm';
 import CustomerForm from './forms/CustomerForm';
 import SalesRecordForm from './forms/SaleRecordForm';
 import MainPage from './MainPage';
@@ -19,8 +19,6 @@ import NewModelForm from './inventory/AddVehicleModel';
 import AddTechnician from './forms/TechnicianForm';
 import AppointmentForm from './forms/AppointmentForm';
 
-// Sales
-import SalesPersonForm from './forms/SalesPersonForm';
 
 function App(props) {
   return (
@@ -31,7 +29,7 @@ function App(props) {
           <Routes>
             <Route path="/" element={<MainPage />} />
             <Route path="/new_customer" element={<CustomerForm />} />
-            <Route path="/new_salesperson" element={<SalesPersonForm />} />
+            <Route path="/new_salesperson" element={<SalespersonForm />} />
             <Route path="/salesperson_history" element={<SalespersonHistory />} />
             <Route path="/new_sale" element={<SalesRecordForm />} />
             <Route path="/all_sales" element={<AllSales />} />
