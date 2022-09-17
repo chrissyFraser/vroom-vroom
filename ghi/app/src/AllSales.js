@@ -5,6 +5,7 @@ function SaleColumn(props) {
     return (
         <div className="col">
             {props.list.map(sale => {
+                console.log(props)
                 return (
                     <div key={sale.id} className="card mb-3 shadow">
                         <div className="card-body">
@@ -12,7 +13,7 @@ function SaleColumn(props) {
                                 <h4 className="card-title">Sale {sale.id}:</h4>
                                 <ul>
                                     <li><strong>Salesperson:</strong><p id="liData">{sale.salesperson.name}</p></li>
-                                    <li><strong>Employee Number:</strong><p id="liData">{sale.salesperson.id}</p></li>
+                                    <li><strong>Employee Number:</strong><p id="liData">{sale.salesperson.employeeNumber}</p></li>
                                     <li><strong>Customer:</strong><p id="liData">{sale.customer.name}</p></li>
                                     <li><strong>VIN:</strong><p id="liData">{sale.automobile.vin}</p></li>
                                     <li><strong>Price:</strong><p id="liData">{sale.price}</p></li>

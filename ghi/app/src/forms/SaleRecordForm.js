@@ -20,10 +20,8 @@ class SaleRecordForm extends React.Component {
     async handleSubmit(event) {
         event.preventDefault();
         const data = { ...this.state };
+        console.log(data)
 
-        data.salesperson = data.salesperson;
-
-        delete data.salesperson;
         delete data.automobiles;
         delete data.salespeople;
         delete data.customers;
