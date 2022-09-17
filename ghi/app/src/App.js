@@ -10,7 +10,19 @@ import AddAutomobile from './inventory/AddAutomobile';
 import ListAutomobiles from './inventory/ListAutomobiles';
 import ListVehicleModels from './inventory/ListVehicleModels';
 
-function App() {
+// Inventory
+import NewManufacturerForm from './inventory/AddManufacturer';
+import ManufacturerList from './inventory/ListManufacturers';
+import NewModelForm from './inventory/AddVehicleModel';
+
+// Services
+import AddTechnician from './forms/TechnicianForm';
+import AppointmentForm from './forms/AppointmentForm';
+
+// Sales
+import SalesPersonForm from './forms/SalesPersonForm';
+
+function App(props) {
   return (
     <BrowserRouter>
       <header>
