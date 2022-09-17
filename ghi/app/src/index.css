@@ -48,3 +48,12 @@ h3 {
 #vroom {
   color:white
 }
+
+img {
+  width:200px;
+}
+
+
+.card-body {
+  min-height:350px
+}
