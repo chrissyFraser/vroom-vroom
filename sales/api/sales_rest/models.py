@@ -45,7 +45,7 @@ class SalesRecord(models.Model):
     price = models.IntegerField()
 
     def __str__(self):
-        return str("Salesperson: " + self.salesperson.name)
+        return str(self.salesperson.name)
 
 
 
