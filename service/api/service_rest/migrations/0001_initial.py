@@ -16,8 +16,9 @@ class Migration(migrations.Migration):
             name='AutoVO',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('import_href', models.CharField(max_length=250, unique=True)),
-                ('vin', models.CharField(max_length=22)),
+                ('color', models.CharField(default='---', max_length=50)),
+                ('year', models.SmallIntegerField()),
+                ('vin', models.CharField(max_length=25, unique=True)),
             ],
         ),
         migrations.CreateModel(
@@ -32,11 +33,14 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('vip', models.BooleanField(default=False)),
-                ('vin', models.CharField(max_length=22)),
-                ('customer_name', models.CharField(max_length=200)),
-                ('date_time', models.DateTimeField()),
+                ('owner', models.CharField(max_length=200)),
+                ('date', models.DateField(auto_now=True, null=True)),
+                ('time', models.TimeField(auto_now=True, null=True)),
                 ('reason', models.TextField()),
-                ('technician', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='appointments', to='service_rest.technician')),
+                ('finished', models.BooleanField(default=False)),
+                ('canceled', models.BooleanField(default=False)),
+                ('technician', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='appointment', to='service_rest.technician')),
+                ('vehicle', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='service', to='service_rest.autovo')),
             ],
         ),
     ]
