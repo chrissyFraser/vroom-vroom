@@ -14,7 +14,7 @@ class TechEncoder(ModelEncoder):
     model = Technician
     properties = [
         "name",
-        "employee_id",
+        "id",
     ]
 
 class ApptEncoder(ModelEncoder):

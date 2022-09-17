@@ -5,12 +5,12 @@ class AppointmentForm extends React.Component {
         super(props)
         this.state= {
             vip: '',
-            vehicle: [],
+            vehicles: [],
             owner: '',
             date: '',
             time: '',
             reason: '',
-            technician: [],
+            technicians: [],
 
         };
         this.handleVipChange = this.handleVipChange.bind(this);
@@ -40,10 +40,7 @@ class AppointmentForm extends React.Component {
         const value = event.target.value
         this.setState({date: value})
     }
-    handleVipChange(event) {
-        const value = event.target.value
-        this.setState({vip: value})
-    }
+    
     handleTimeChange(event) {
         const value = event.target.value
         this.setState({time: value})
@@ -60,11 +57,11 @@ class AppointmentForm extends React.Component {
 
     async handleSubmit(event) {
         event.preventDefault();
-        const data = {...this.state, finished:"False", canceled: "False"};
-        delete data.vehicle
-        delete data.technician
+        const data = {...this.state};
+        delete data.vehicles
+        delete data.technicians
 
-        const appointmentUrl = 'http://localhost:8080/api/appointment';
+        const appointmentUrl = 'http://localhost:8080/api/appointments/';
         const fetchConfig = {
             method: 'post',
             body: JSON.stringify(data),
@@ -78,14 +75,12 @@ class AppointmentForm extends React.Component {
 
             const cleared= {
                 vip: '', 
-                vehicle: [], 
+                vehicles: [], 
                 owner: '', 
                 date: '', 
                 time: '', 
                 reason: '', 
-                technician: [], 
-                finished:'', 
-                canceled:'', 
+                technicians: [], 
             };
             this.setState(cleared);
         }
@@ -100,8 +95,8 @@ class AppointmentForm extends React.Component {
         if (techResponse.ok) {
             const techData = await techResponse.json();
             const autoData = await autoResponse.json();
-            this.setState({vehicle: autoData.autos})// Not sure about this
-            this.setState({technician: techData.technicians})// Not sure about this
+            this.setState({vehicles: autoData.autos})// Not sure about this
+            this.setState({technicians: techData.technicians})// Not sure about this
         }
     }
 
@@ -115,7 +110,7 @@ class AppointmentForm extends React.Component {
                             <div className="mb-4">
                                 <select onChange={this.handleVehicleChange} value={this.state.vehicle} required id="vehicle" name="vehicle" className="form-select">
                                     <option value="">Choose Vehicle</option>
-                                    {this.state.vehicle.map(vehicle => {
+                                    {this.state.vehicles.map(vehicle => {
                                         return (
                                             <option key={vehicle.vin} value={vehicle.vin}>{vehicle.vin}</option>
                                         );
@@ -124,7 +119,7 @@ class AppointmentForm extends React.Component {
                             </div>
 
                             <div className='form-floating mb-4'>
-                                <select onChange={this.handleVipChange} value={this.state.vip} placeholder="VIP" required type="text" name="VIP" id="VIP" className="form-select" >
+                                <select onChange={this.handleVipChange} value={this.state.vip} placeholder="VIP" required type="text" name="VIP" id="VIP" className="form-select">
                                     <option value="">Is VIP?</option>
                                     <option value="True">Yes</option>
                                     <option value="False">No</option>
@@ -152,15 +147,16 @@ class AppointmentForm extends React.Component {
                             </div>
 
                             <div className='form-floating mb-4'> 
-                                <select onChange={this.handleTechChange} value={this.state.technician} required id="Technician" name="technician" className="form-select">
+                                <select onChange={this.handleTechnicianChange} value={this.state.technician} required id="Technician" name="technician" className="form-select">
                                     <option value="">Choose Tech</option>
-                                    {this.state.technician.map(technician => {
+                                    {this.state.technicians.map(technician => {
                                         return (
-                                            <option key={technician.employee_id} value={technician.employee_id}>{technician.name}</option>
+                                            <option key={technician.id} value={technician.id}>{technician.name}</option>
                                         );
                                     })}
                                 </select>
                             </div>
+                            <button className="btn btn-primary" id="techBtn">Submit</button>
                         </form>
                     </div>
                 </div>

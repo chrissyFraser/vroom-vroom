@@ -6,7 +6,8 @@ class NewModelForm extends React.Component {
         this.state = {
             name: '',
             picture_url: '',
-            manufacturer: []
+            manufacturers: [],
+            //manufacturer: '',
         };
 
         this.handleNameChange = this.handleNameChange.bind(this);
@@ -19,8 +20,10 @@ class NewModelForm extends React.Component {
         event.preventDefault();
 
         const data = {...this.state};
-
+        data.manufacturer_id=data.manufacturer
+        delete data.manufacturers;
         delete data.manufacturer;
+
 
         const modelUrl = 'http://localhost:8100/api/models/'
         const fetchConfig = {
@@ -33,12 +36,10 @@ class NewModelForm extends React.Component {
         const response = await fetch(modelUrl, fetchConfig);
 
         if (response.ok) {
-            const newModel = await response.json();
-
             const cleared = {
                 name: '',
                 picture_url: '',
-                manufacturer: [],
+                manufacturers: [],
             };
             this.setState(cleared);
         }
@@ -56,7 +57,7 @@ class NewModelForm extends React.Component {
 
     handleManufacturerChange(event) {
         const value = event.target.value;
-        this.setState({manufacturer_id: value})
+        this.setState({manufacturer: value})
     }
 
     async componentDidMount() {
@@ -65,8 +66,9 @@ class NewModelForm extends React.Component {
         
         if (response.ok) {
             const data = await response.json();
-
-            this.setState({manufacturer: data.manufacturer})
+            let manufacturers = data;
+            this.setState({manufacturers: data.manufacturers})
+            console.log(manufacturers)
         }
     }
 
@@ -75,10 +77,10 @@ class NewModelForm extends React.Component {
             <div className="row">
                 <div className="offset-4 col-8">
                     <div className="shadow p-3 mt-4">
-                        <h1> Create a new Vehicle Model</h1>
+                        <h1>Create a new Vehicle Model</h1>
                         <form onSubmit={this.handleSubmit} id="create-model-form">
                             <div className="form-floating mb-4">
-                                <input onChange={this.handleNamechange} value={this.state.name} placeholder="Name" required type="text" name="name" id="name" className="form-control" />
+                                <input onChange={this.handleNameChange} value={this.state.name} placeholder="Name" required type="text" name="name" id="name" className="form-control" />
                                 <label htmlFor="name">Name</label>
                             </div>
                             <div className="form-floating mb-4">
@@ -86,11 +88,11 @@ class NewModelForm extends React.Component {
                                 <label htmlFor="picture_url">Picture URL</label>
                             </div>
                             <div className="form-floating mb-4">
-                                <select onChange={this.handleManufacturerChange} value={this.state.manufacturer_id} required id="manufacturer_id" name="manufacturer_id" className="form-select">
-                                    <option value="">Choose Manufacturer</option>
-                                    {this.state.manufacturer.map(manufacturer_id => {
+                                <select onChange={this.handleManufacturerChange} value={this.state.manufacturer} required id="manufacturer" name="manufacturer" className="form-select">
+                                    <option>Choose Manufacturer</option>
+                                    {this.state.manufacturers.map(manufacturer => {
                                         return (
-                                            <option key={manufacturer_id.id} value={manufacturer_id.id}>{manufacturer_id.name}</option>
+                                            <option key={manufacturer.id} value={manufacturer.id}>{manufacturer.name}</option>
                                         );
                                     })}
                                 </select>

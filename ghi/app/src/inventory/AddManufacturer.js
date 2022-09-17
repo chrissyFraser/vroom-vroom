@@ -44,7 +44,9 @@ class NewManufacturerForm extends React.Component{
                             <div className="form-floating mb-4">
                                 <input onChange={this.handleNameChange} value={this.state.name} placeholder="name" required type="text" name="name" id="name" className="form-control" />
                                 <label htmlFor="manufacturer">Name</label>
+
                             </div>
+                            <button className="btn btn-primary" id="addAutoBtn">Create</button>
                         </form>
                     </div>
                 </div>

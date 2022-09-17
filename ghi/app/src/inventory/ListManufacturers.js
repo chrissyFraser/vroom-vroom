@@ -12,7 +12,8 @@ class ManufacturerList extends React.Component {
         
         if (response.ok) {
             const data = await response.json();
-            this.setState({manufacturers : data.manfacturers})
+            let manufacturers = data
+            this.setState({manufacturers : data.manufacturers})
         }
     }
 
@@ -31,7 +32,7 @@ class ManufacturerList extends React.Component {
                         <tbody>
                             {this.state.manufacturers.map(manufacturer => {
                                 return (
-                                    <tr key={ manufacturer.href }>
+                                    <tr key={ manufacturer.id }>
                                     <td>{ manufacturer.name }</td>
                                     </tr>
                                 );
