@@ -5,8 +5,8 @@ Tasks:
 [x] Create Models, virtual objects, for service_rest
 [x] Create urls.py file in service_rest
 [x] Create encoders.py for models
+[x] Create RESTful views for technicians.
 [] Create RESTful views for appointments.
-[] Create RESTful views for technicians.
 [] Create view for GET service history for specific VIN.
 
 

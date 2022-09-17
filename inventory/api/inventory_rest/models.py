@@ -8,6 +8,9 @@ class Manufacturer(models.Model):
     def get_api_url(self):
         return reverse("api_manufacturer", kwargs={"pk": self.id})
 
+    def __str__(self):
+        return self.name
+
 
 class VehicleModel(models.Model):
     name = models.CharField(max_length=100)
@@ -21,6 +24,9 @@ class VehicleModel(models.Model):
 
     def get_api_url(self):
         return reverse("api_vehicle_model", kwargs={"pk": self.id})
+
+    def __str__(self):
+        return self.name
 
 
 class Automobile(models.Model):
@@ -36,3 +42,13 @@ class Automobile(models.Model):
 
     def get_api_url(self):
         return reverse("api_automobile", kwargs={"vin": self.vin})
+
+    def __str__(self):
+        return self.model, self.year
+
+
+
+
+
+
+# {'autos': [{'href': '/api/automobiles/5N1MD28Y02C565437/', 'id': 1, 'color': 'black', 'year': 2011, 'vin': '5N1MD28Y02C565437', 'model': {'href': '/api/models/1/', 'id': 1, 'name': 'CR-V', 'picture_url': 'https://automanager.blob.core.windows.net/wmphotos/019736/e33cd0df53714018864928f440f4e02e/42dfb9cc0e_800.jpg', 'manufacturer': {'href': '/api/manufacturers/1/', 'id': 1, 'name': 'Honda'}}}, {'href': '/api/automobiles/6N1MD28Y02C565437/', 'id': 2, 'color': 'black', 'year': 2011, 'vin': '6N1MD28Y02C565437', 'model': {'href': '/api/models/1/', 'id': 1, 'name': 'CR-V', 'picture_url': 'https://automanager.blob.core.windows.net/wmphotos/019736/e33cd0df53714018864928f440f4e02e/42dfb9cc0e_800.jpg', 'manufacturer': {'href': '/api/manufacturers/1/', 'id': 1, 'name': 'Honda'}}}]}
