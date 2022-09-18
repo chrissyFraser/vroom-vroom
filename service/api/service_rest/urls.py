@@ -15,3 +15,4 @@ urlpatterns = [
     path("technicians/<int:pk>/", technician_detail, name="technician_detail"),
     path("vin/appointment/<str:vin>/", service_history, name="service_list"),
 ]
+

@@ -14,7 +14,7 @@ class TechEncoder(ModelEncoder):
     model = Technician
     properties = [
         "name",
-        "employee_id",
+        "id",
     ]
 
 class ApptEncoder(ModelEncoder):
@@ -31,6 +31,6 @@ class ApptEncoder(ModelEncoder):
         "canceled",
     ]
     encoders = {
-        "auto": AutoVOEncoder(),
+        "vehicle": AutoVOEncoder(),
         "technician": TechEncoder(),
     }

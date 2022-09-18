@@ -28,14 +28,32 @@ function App(props) {
         <div className="container">
           <Routes>
             <Route path="/" element={<MainPage />} />
+
+
+            {/* Inventory Nav */}
+            <Route path="/add_auto" element={<AddAutomobile />} />
+            <Route path="/auto_list" element={<ListAutomobiles />} />
+            <Route path="/new_model" element={<NewModelForm />} />
+            <Route path="/model_list" element={<ListVehicleModels />} />
+            <Route path="/new_manufacturer" element={<NewManufacturerForm />} />
+            <Route path="/manufacturer_list" element={<ManufacturerList />} />
+            
+
+            {/* Sales Nav */}
             <Route path="/new_customer" element={<CustomerForm />} />
             <Route path="/new_salesperson" element={<SalespersonForm />} />
             <Route path="/salesperson_history" element={<SalespersonHistory />} />
             <Route path="/new_sale" element={<SalesRecordForm />} />
             <Route path="/all_sales" element={<AllSales />} />
-            <Route path="/add_auto" element={<AddAutomobile />} />
-            <Route path="/auto_list" element={<ListAutomobiles />} />
-            <Route path="/model_list" element={<ListVehicleModels />} />
+
+
+            {/* Services Nav */}
+            <Route path="/new_appointment" element={<AppointmentForm />} />
+            <Route path="/new_technician" element={<AddTechnician />} />
+
+
+
+            
           </Routes>
         </div>
       </header>

@@ -11,7 +11,7 @@ class AutoVO(models.Model):
 
 class Technician(models.Model):
     name = models.CharField(max_length=200)
-    employee_id = models.CharField(max_length=50)
+    id = models.IntegerField(primary_key=True)
 
     def __str__(self):
         return self.name
@@ -29,10 +29,6 @@ class Appointment(models.Model):
     technician = models.ForeignKey(Technician, related_name="appointment", on_delete=models.PROTECT)
     finished = models.BooleanField(default=False)
     canceled = models.BooleanField(default=False)
-
-
-    def get_api_url(self):
-        return reverse("appointment_detail", kwargs={"pk": self.id})
 
     def __str__(self):
         return f"Appointment for {self.owner}, VIP: {self.vip}"

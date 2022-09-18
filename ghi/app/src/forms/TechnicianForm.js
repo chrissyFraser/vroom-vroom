@@ -5,7 +5,8 @@ class AddTechnician extends React.Component{
         super(props)
         this.state={
             name:'',
-            employee_id:'',
+            id:'',
+
         };
         this.handleNameChange = this.handleNameChange.bind(this);
         this.handleIdChange = this.handleIdChange.bind(this);
@@ -29,7 +30,7 @@ class AddTechnician extends React.Component{
         if (response.ok) {
             const cleared = {
                 name: '',
-                employee_id: '',
+                id: '',
             };
             this.setState(cleared);
         }
@@ -42,7 +43,7 @@ class AddTechnician extends React.Component{
 
     handleIdChange(event) {
         const value = event.target.value;
-        this.setState({employee_id:value})
+        this.setState({id:value})
     }
 
     render(){
@@ -57,8 +58,8 @@ class AddTechnician extends React.Component{
                                 <label htmlFor="name">Name</label>
                             </div>
                             <div className="form floating mb-4">
-                                <input onChange={this.handleIdChange} value={this.state.employee_id} placeholder="Employee Id" required type="text" name="id" id="id" className="form-control" />
-                                <label htmlFor="name">Technician ID Number</label>
+                                <input onChange={this.handleIdChange} value={this.state.id} placeholder="id" required type="text" name="id" id="id" className="form-control" />
+                                <label htmlFor="id">Technician ID Number</label>
                             </div>
                             <button className="btn btn-primary" id="techBtn">Submit</button>
                         </form>

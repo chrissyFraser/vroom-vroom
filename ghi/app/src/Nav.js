@@ -54,6 +54,32 @@ function Nav() {
                 Vehicle Model List
               </NavLink>
             </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" aria-current="page" to="/new_manufacturer">
+                New Manufacturer
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" aria-current="page" to="/manufacturer_list">
+                Manufacturer List
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" aria-current="page" to="/new_model">
+                New Model
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" aria-current="page" to="/new_appointment">
+                New Appointment
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" aria-current="page" to="/new_technician">
+                New Technician
+              </NavLink>
+            </li>
+
           </ul>
         </div>
       </div>

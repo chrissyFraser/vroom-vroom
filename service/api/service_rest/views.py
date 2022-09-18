@@ -17,15 +17,16 @@ def appointment_list(request):
             safe=False
         )
     else:
-        content = json.loads(request.body)
         try:
-            vin_key = content["automobile"]
+            content = json.loads(request.body)
+            vin_key = content["vehicle"]
             vin_value = AutoVO.objects.get(vin=vin_key)
-            print("vin value", vin_value)
-            content["automobile"] = vin_value
-            tech_key = content["tech"]
+            content["vehicle"] = vin_value
+
+            tech_key = content["technician"]
             tech_value = Technician.objects.get(id=tech_key)
-            content["tech"] = tech_value
+            # print(tech_value)
+            content["technician"] = tech_value
             appointment = Appointment.objects.create(**content)
             print(appointment)
             return JsonResponse(
@@ -96,14 +97,13 @@ def technician_list(request):
         return JsonResponse(
             {"technicians": technicians},
             encoder=TechEncoder,
-            safe=False,
         )
     else:
         try:
             content=json.loads(request.body)
-            technicians = Technician.objects.create(**content)
+            technician = Technician.objects.create(**content)
             return JsonResponse(
-                technicians,
+                technician,
                 encoder=TechEncoder,
                 safe=False
             )
@@ -178,3 +178,4 @@ def service_history(request, vin):
                 {"message": "APPOINTMENT does not exist"},
                 status=400,
             )
+
