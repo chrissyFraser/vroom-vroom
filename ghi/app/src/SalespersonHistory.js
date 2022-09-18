@@ -31,8 +31,9 @@ export default class SalespersonHistory extends React.Component {
 
         if (salespersonResponse.ok) {
             const salespersonData = await salespersonResponse.json();
-
-            this.setState({ salespeople: salespersonData.salesperson })
+console.log("HEY YOU SHOULD LOOK AT THIS STUFF SO LOOK AT IT ALREADY >>>>>>>>>>>>>>>", salespersonData)
+            this.setState({ salespeople: salespersonData.sales_people })
+            
         }
     }
 
