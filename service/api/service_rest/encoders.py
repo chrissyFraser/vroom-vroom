@@ -31,6 +31,6 @@ class ApptEncoder(ModelEncoder):
         "canceled",
     ]
     encoders = {
-        "auto": AutoVOEncoder(),
+        "vehicle": AutoVOEncoder(),
         "technician": TechEncoder(),
     }

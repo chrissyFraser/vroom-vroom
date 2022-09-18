@@ -126,20 +126,21 @@ def api_sales(request):
         try:
             content = json.loads(request.body)
 
-            autoID = content["automobile"]
-            automobile = AutomobileVO.objects.get(vin=autoID)
-            content["automobile"] = automobile
+            # print("I wanna see Dis", content)
+            salespersonID = content["salesperson"]
+            salesperson = Salesperson.objects.get(employeeNumber=salespersonID)
+            # print(salesperson)
+            content["salesperson"] = salesperson
 
             customerID = content["customer"]
             customer = Customer.objects.get(id=customerID)
             content["customer"] = customer
 
-            print("I wanna see Dis", content)
+            
 
-            salespersonID = content["salesperson"]
-            salesperson = Salesperson.objects.get(id=salespersonID)
-            print(salesperson)
-            content["salesperson"] = salesperson
+            autoID = content["automobile"]
+            automobile = AutomobileVO.objects.get(vin=autoID)
+            content["automobile"] = automobile
 
             sales = SalesRecord.objects.create(**content)
             return JsonResponse(

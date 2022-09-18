@@ -20,7 +20,6 @@ def appointment_list(request):
         try:
             content = json.loads(request.body)
             vin_key = content["vehicle"]
-            print("THISISMYVINKEY!!!!!!!!!!!!", vin_key)
             vin_value = AutoVO.objects.get(vin=vin_key)
             content["vehicle"] = vin_value
 
