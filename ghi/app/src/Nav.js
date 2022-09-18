@@ -79,7 +79,6 @@ function Nav() {
                 New Technician
               </NavLink>
             </li>
-
           </ul>
         </div>
       </div>

@@ -85,7 +85,7 @@ class SaleRecordForm extends React.Component {
             const customerData = await customerResponse.json();
 
             this.setState({ automobiles: automobileData.autos })
-            this.setState({ salespeople: salespersonData.salesperson})
+            this.setState({ salespeople: salespersonData.sales_people})
             this.setState({ customers: customerData.customers })
         }
     }

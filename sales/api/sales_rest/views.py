@@ -50,9 +50,9 @@ class SalesRecordEncoder(ModelEncoder):
 @require_http_methods(["GET", "POST"])
 def api_new_salesperson(request):
     if request.method == "GET":
-        salesperson = Salesperson.objects.all()
+        sales_person = Salesperson.objects.all()
         return JsonResponse(
-            {"salesperson": salesperson},
+            {"sales_people": sales_person},
             encoder=SalespersonEncoder,
         )
     else:
@@ -126,20 +126,21 @@ def api_sales(request):
         try:
             content = json.loads(request.body)
 
-            autoID = content["automobile"]
-            automobile = AutomobileVO.objects.get(vin=autoID)
-            content["automobile"] = automobile
+            # print("I wanna see Dis", content)
+            salespersonID = content["salesperson"]
+            salesperson = Salesperson.objects.get(employeeNumber=salespersonID)
+            # print(salesperson)
+            content["salesperson"] = salesperson
 
             customerID = content["customer"]
             customer = Customer.objects.get(id=customerID)
             content["customer"] = customer
 
-            print("I wanna see Dis", content)
+            
 
-            salespersonID = content["salesperson"]
-            salesperson = Salesperson.objects.get(id=salespersonID)
-            print(salesperson)
-            content["salesperson"] = salesperson
+            autoID = content["automobile"]
+            automobile = AutomobileVO.objects.get(vin=autoID)
+            content["automobile"] = automobile
 
             sales = SalesRecord.objects.create(**content)
             return JsonResponse(
