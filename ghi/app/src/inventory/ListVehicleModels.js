@@ -76,7 +76,7 @@ class  ListVehicleModels extends React.Component {
                     <h1 className="display-5 fw-bold">All Models</h1>
                 </div>
                 <div className="container" id='vehicleModelContainer'>
-                    <h3 id="modelScroll"></h3>
+                    <h3 id="model"></h3>
                     <div className="row">
                         {this.state.modelColumns.map((modelList, index) => {
                             return (

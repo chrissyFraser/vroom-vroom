@@ -80,12 +80,6 @@ class AllSales extends React.Component {
                 <div className="px-4 py-5 my-5 mt-0 text-center">
                     <img className="bg-white rounded shadow d-block mx-auto mb-4" alt="" width="600" />
                     <h1 className="display-5 fw-bold">All Sales</h1>
-                    <div className="col-lg-6 mx-auto">
-                        <p className="lead mb-4" id="vehModSub">
-                            Sales Records
-                        </p>
-
-                    </div>
                 </div>
                 <div className="container" id='salesContainer'>
                     <h3 id="salesScroll"></h3>
