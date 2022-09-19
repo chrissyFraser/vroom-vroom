@@ -79,7 +79,11 @@ function Nav() {
                 New Technician
               </NavLink>
             </li>
-
+            <li className="nav-item">
+              <NavLink className="nav-link" aria-current="page" to="/appt_list">
+                Appointments
+              </NavLink>
+            </li>
           </ul>
         </div>
       </div>
