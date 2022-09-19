@@ -1,11 +1,11 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import SalespersonForm from './forms/SalespersonForm';
-import CustomerForm from './forms/CustomerForm';
-import SalesRecordForm from './forms/SaleRecordForm';
+import SalespersonForm from './sales/SalespersonForm';
+import CustomerForm from './sales/CustomerForm';
+import SalesRecordForm from './sales/SaleRecordForm';
 import MainPage from './MainPage';
 import Nav from './Nav';
-import SalespersonHistory from './SalespersonHistory';
-import AllSales from './AllSales'
+import SalespersonHistory from './sales/SalespersonHistory';
+import AllSales from './sales/AllSales'
 import AddAutomobile from './inventory/AddAutomobile';
 import ListAutomobiles from './inventory/ListAutomobiles';
 import ListVehicleModels from './inventory/ListVehicleModels';
@@ -16,8 +16,8 @@ import ManufacturerList from './inventory/ListManufacturers';
 import NewModelForm from './inventory/AddVehicleModel';
 
 // Services
-import AppointmentForm from './forms/AppointmentForm';
-import AddTechnician from './forms/TechnicianForm';
+import AddTechnician from './services/TechnicianForm';
+import AppointmentForm from './services/AppointmentForm';
 
 
 function App(props) {

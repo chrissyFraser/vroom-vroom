@@ -58,7 +58,7 @@ class AddTechnician extends React.Component{
                                 <label htmlFor="name">Name</label>
                             </div>
                             <div className="form floating mb-4">
-                                <input onChange={this.handleIdChange} value={this.state.id} placeholder="id" required type="text" name="id" id="id" className="form-control" />
+                                <input onChange={this.handleIdChange} value={this.state.id} placeholder="ID" required type="text" name="id" id="id" className="form-control" />
                                 <label htmlFor="id">Technician ID Number</label>
                             </div>
                             <button className="btn btn-primary" id="techBtn">Submit</button>
