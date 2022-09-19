@@ -31,20 +31,20 @@ h3 {
   color: white
 }
 
-/* .btn {
+.btn {
   background-color:rgb(136, 136, 136);
   border-color:rgb(255, 255, 255);
   border-width:2px;
   border: 1px solid;
   color:white;
   font-style:bold;
-} */
+}
 
 
 /* /////////////////////////////
 //scooter's button css
 /////////////////////////// */
-.btn {
+/* .btn {
   border: 1px solid;
   overflow: hidden;
   position: relative;
@@ -74,6 +74,7 @@ h3 {
     transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
   }
 }
+*/
 
 .table {
   color: white
@@ -95,4 +96,4 @@ img {
 
 .card-body {
   min-height: 350px
-}
+} 

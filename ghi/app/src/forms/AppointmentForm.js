@@ -156,7 +156,7 @@ class AppointmentForm extends React.Component {
                                     })}
                                 </select>
                             </div>
-                            <button className="btn btn-secondary" id="techBtn">Submit</button>
+                            <button className="btn btn-primary" id="techBtn">Submit</button>
                         </form>
                     </div>
                 </div>

@@ -105,7 +105,7 @@ class AddAutomobile extends React.Component {
                                     <input onChange={this.handleVinChange} value={this.state.vin} placeholder="vin" required type="text" name="vin" id="vin" className="form-control" />
                                     <label htmlFor="vin">VIN</label>                     
                                 </div>
-                                <button className="btn btn-secondary" id="addAutoBtn">Create</button>
+                                <button className="btn btn-primary" id="addAutoBtn">Create</button>
                             </form>
                         </div>
                     </div>

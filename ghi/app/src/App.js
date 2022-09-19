@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import SalespersonForm from './forms/SalesPersonForm';
+import SalespersonForm from './forms/SalespersonForm';
 import CustomerForm from './forms/CustomerForm';
 import SalesRecordForm from './forms/SaleRecordForm';
 import MainPage from './MainPage';
