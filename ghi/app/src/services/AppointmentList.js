@@ -4,13 +4,16 @@ export default class AppointmentList extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
+            appointments: [],
             vip: '',
-            vehicles: [],
+            vehicle: '',
             owner: '',
             date: '',
             time: '',
             reason: '',
             technicians: [],
+            canceled: '',
+            finished:'',
         };
 
         this.handleAppointmentChange = this.handleAppointmentChange.bind(this);
@@ -35,11 +38,14 @@ export default class AppointmentList extends React.Component {
 
         if (appointmentResponse.ok) {
             const appointmentData = await appointmentResponse.json();
-console.log("HEY YOU SHOULD LOOK AT THIS STUFF SO LOOK AT IT ALREADY >>>>>>>>>>>>>>>", appointmentData)
+        console.log("HEY YOU SHOULD LOOK AT THIS STUFF SO LOOK AT IT ALREADY >>>>>>>>>>>>>>>", appointmentData)
             this.setState({ appointments: appointmentData.appointments })
             
         }
     }
+    
+    
+
 
     render() {
         return (
@@ -52,7 +58,7 @@ console.log("HEY YOU SHOULD LOOK AT THIS STUFF SO LOOK AT IT ALREADY >>>>>>>>>>>
                     <option value="">appointment</option>
                     {this.state.appointments.map(appointment => {                   
                         return (
-                            <option key={appointment.vehicle.vin} value={appointment.vehicle.vin}>{appointment.owner}</option>
+                            <option key={appointment.id} value={appointment.vehicle.vin}>{appointment.owner}</option>
                         );
                     })}
                 </select>
@@ -61,8 +67,6 @@ console.log("HEY YOU SHOULD LOOK AT THIS STUFF SO LOOK AT IT ALREADY >>>>>>>>>>>
                     <tr>
                         <th>VIN</th>
                         <th>Owner</th>
-                        <th>VIP Status</th>
-                        <th>Vehicle</th>
                         <th>Date</th>
                         <th>Time</th>
                         <th>Reason</th>
@@ -75,11 +79,12 @@ console.log("HEY YOU SHOULD LOOK AT THIS STUFF SO LOOK AT IT ALREADY >>>>>>>>>>>
                             <tr key={appointment.id}>
                                 <td>{appointment.vehicle.vin}</td>
                                 <td>{appointment.owner}</td>
-                                <td>{appointment.vip}</td>
-                                <td>{appointment.vehicle}</td>
                                 <td>{appointment.date}</td>
+                                <td>{appointment.time}</td>
                                 <td>{appointment.reason}</td>
-                                <td>{appointment.techinician}</td>
+                                <td key={appointment.technician.id}>{appointment.technician.name}</td>
+                                <button type="button" className="btn btn-outline-danger" id="cancel">Cancel</button>
+                                <button type="button" className="btn btn-outline-success" id="cancel">Finished</button>
                             </tr>
                         );
                     })}
