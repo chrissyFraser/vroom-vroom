@@ -55,7 +55,7 @@ def api_new_salesperson(request):
             {"sales_people": sales_person},
             encoder=SalespersonEncoder,
         )
-    else:
+    else: #"POST"
         content = json.loads(request.body)
         print("LOOK HERE!", content)
         
@@ -66,6 +66,56 @@ def api_new_salesperson(request):
             encoder=SalespersonEncoder,
             safe=False,
         )
+
+
+@require_http_methods(["GET", "PUT", "DELETE"])
+def api_salesperson_details(request, pk):
+    if request.method == "GET":
+        try:
+            salesperson = Salesperson.objects.filter(id=pk)
+            return JsonResponse(
+                salesperson,
+                encoder=SalespersonEncoder,
+                safe=False
+            )
+        except Salesperson.DoesNotExist:
+            response = JsonResponse({"message": "Salespesron Doesn't Exist"})
+            response.status_code = 404
+            return response
+
+    elif request.method == "DELETE":
+        try:
+            salesperson = Salesperson.objects.get(id=pk)
+            salesperson.delete()
+            return JsonResponse(
+                salesperson,
+                encoder=SalespersonEncoder,
+                safe=False,
+            )
+        except Salesperson.DoesNotExist:
+            return JsonResponse(
+                {"message": "Salesperson Doesn't Exist"}
+            )
+        
+    else: #"PUT"
+        try:
+            content = json.loads(request.body)
+            salesperson = Salesperson.objects.get(id=pk)
+            props = ["name", "employeeNumber", "id"]
+            for prop in props:
+                if prop in content:
+                    setattr(salesperson, prop, content[prop])
+            salesperson.save()
+            return JsonResponse(
+                salesperson,
+                encoder=SalespersonEncoder,
+                safe=False,
+            )
+        except Salesperson.DoesNotExist:
+            return JsonResponse(
+                {"message": "Salesperson Doesn't Exist"}
+            )
+
 
 @require_http_methods(["GET"])
 def api_salesperson_records(request, pk):
@@ -122,7 +172,7 @@ def api_sales(request):
             {"sales": sales},
             encoder=SalesRecordEncoder,
         )
-    else:
+    else: #"POST"
         try:
             content = json.loads(request.body)
 
@@ -184,7 +234,7 @@ def api_sale_details(request, pk):
             return JsonResponse(
                 {"message": "SalesRecord Doesn't Exist"}
             )
-    else:
+    else: #"PUT"
         try:
             content = json.loads(request.body)
 
