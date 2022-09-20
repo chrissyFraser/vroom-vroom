@@ -79,7 +79,7 @@ def api_salesperson_details(request, pk):
                 safe=False
             )
         except Salesperson.DoesNotExist:
-            response = JsonResponse({"message": "Salespesron Doesn't Exist"})
+            response = JsonResponse({"message": "Salesperson Doesn't Exist"})
             response.status_code = 404
             return response
 
@@ -121,16 +121,50 @@ def api_salesperson_details(request, pk):
 def api_salesperson_records(request, pk):
     if request.method == "GET":
         try:
-            salesperson = SalesRecord.objects.filter(salesperson=pk)
+            salesperson_record = SalesRecord.objects.filter(salesperson=pk)
             return JsonResponse(
-                salesperson,
+                salesperson_record,
                 encoder=SalesRecordEncoder,
                 safe=False
             )
         except SalesRecord.DoesNotExist:
-            response = JsonResponse({"message": "SalesRecord Doesn't Exist"})
+            response = JsonResponse({"message": "Salesperson Record Doesn't Exist"})
             response.status_code = 404
             return response
+
+
+    elif request.method == "DELETE":
+        try:
+            salesperson_record = SalesRecord.objects.filter(salesperson=pk)
+            salesperson_record.delete()
+            return JsonResponse(
+                salesperson_record,
+                encoder=SalesRecordEncoder,
+                safe=False,
+            )
+        except Salesperson.DoesNotExist:
+            return JsonResponse(
+                {"message": "Salesperson Record Doesn't Exist"}
+            )
+        
+    else: #"PUT"
+        try:
+            content = json.loads(request.body)
+            salesperson_record = SalesRecord.objects.get(id=pk)
+            props = ["name", "employeeNumber", "id"]
+            for prop in props:
+                if prop in content:
+                    setattr(salesperson_record, prop, content[prop])
+            salesperson_record.save()
+            return JsonResponse(
+                salesperson_record,
+                encoder=SalesRecordEncoder,
+                safe=False,
+            )
+        except SalesRecord.DoesNotExist:
+            return JsonResponse(
+                {"message": "Salesperson Record Doesn't Exist"}
+            )
 
 
 @require_http_methods(["GET", "POST"])
@@ -141,7 +175,7 @@ def api_new_customer(request):
             {"customers": customers},
             encoder=CustomerEncoder,
         )
-    else:
+    else: #"POST"
         content = json.loads(request.body)
         customer = Customer.objects.create(**content)
         return JsonResponse(
@@ -151,7 +185,7 @@ def api_new_customer(request):
         )
 
 
-@require_http_methods(["GET"])
+@require_http_methods(["GET", "DELETE", "PUT"])
 def api_customer_details(request, pk):
     if request.method == "GET":
         customer = Customer.objects.get(id=pk)
@@ -160,7 +194,40 @@ def api_customer_details(request, pk):
             encoder=CustomerEncoder,
             safe=False
         )
+    
+    elif request.method == "DELETE":
+        try:
+            customer = Customer.objects.get(id=pk)
+            customer.delete()
+            return JsonResponse(
+                customer,
+                encoder=CustomerEncoder,
+                safe=False
+            )
 
+        except Customer.DoesNotExist:
+            return JsonResponse(
+                {"message": "Customer Doesn't Exist"}
+            )
+
+    else: #"PUT"
+        try:
+            content = json.loads(request.body)
+            customer = Customer.objects.get(id=pk)
+            props = ["name", "address", "phoneNumber", "id"]
+            for prop in props:
+                if prop in content:
+                    setattr(customer, prop, content[prop])
+            customer.save()
+            return JsonResponse(
+                customer,
+                encoder=CustomerEncoder,
+                safe=False,
+            )
+        except Customer.DoesNotExist:
+            return JsonResponse(
+                {"message": "Customer Doesn't Exist"}
+            )
 
 
 
